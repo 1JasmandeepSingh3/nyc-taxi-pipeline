@@ -1,0 +1,11 @@
+/raw/
+/cleaned/
+/pipeline/
+nyc_taxi.duckdb
+nyc_taxi.duckdb.wal
+*.parquet
+*.csv
+__pycache__/
+*.pyc
+.env
+logs/
