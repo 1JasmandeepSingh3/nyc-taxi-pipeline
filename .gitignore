@@ -4,8 +4,8 @@
 nyc_taxi.duckdb
 nyc_taxi.duckdb.wal
 *.parquet
-*.csv
+/dashboard/*.csv
 __pycache__/
 *.pyc
 .env
-logs/
+~$*
