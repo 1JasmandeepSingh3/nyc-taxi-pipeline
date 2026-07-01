@@ -1,4 +1,4 @@
-\## NYC Taxi Trip Pipeline
+1. NYC Taxi Trip Pipeline
 
 
 
@@ -6,7 +6,7 @@ End to End Data Engineering and Analysis Pipeline for NYC TLC Taxi Trip data (20
 
 
 
-\## Project Overview
+2. Project Overview
 
 
 
@@ -16,7 +16,7 @@ answers real question about Demand, Pricing/Tipping, service quality etc.
 
 
 
-\## Technical Stack
+3. Technical Stack
 
 * Python (ingestion + cleaning)
 * DuckDB (Local Data Warehouse)
@@ -26,11 +26,11 @@ answers real question about Demand, Pricing/Tipping, service quality etc.
 
 
 
-\## Data Source
+4. Data Source
 
 
 
-NYC Taxi \& Limousine Commission (TLC) Trip Record Data
+NYC Taxi \ Limousine Commission (TLC) Trip Record Data
 
 
 
@@ -44,11 +44,11 @@ NYC Taxi \& Limousine Commission (TLC) Trip Record Data
 
 
 
-\## Data Quality and assumptions
+5. Data Quality and assumptions
 
 
 
-1. Column Standardizations
+i) Column Standardizations
 
 
 
@@ -60,7 +60,7 @@ NYC Taxi \& Limousine Commission (TLC) Trip Record Data
 
 
 
-2\. Duplicate Handling
+ii) Duplicate Handling
 
 
 
@@ -70,7 +70,7 @@ NYC Taxi \& Limousine Commission (TLC) Trip Record Data
 
 
 
-3\. Dirty Row Flagging
+iii) Dirty Row Flagging
 
 
 
@@ -87,7 +87,7 @@ NYC Taxi \& Limousine Commission (TLC) Trip Record Data
 
 
 
-4\. Payment Type Assumption
+iv) Payment Type Assumption
 
 &#x20;  
 
@@ -106,7 +106,7 @@ Payment codes outside of 1-6 are set to NULL
 
 
 
-5\. Geographic Assumptions
+v) Geographic Assumptions
 
 
 
@@ -116,7 +116,7 @@ Payment codes outside of 1-6 are set to NULL
 
 
 
-6\. Tip Analysis Limitations
+vi) Tip Analysis Limitations
 
 * tip\_amount is only populated for card payments (payment\_type = 1). 
 * All cash trips have tip\_amount = 0 by default, this does not mean cash passengers did not tip, only that tips were not recorded digitally.
@@ -127,7 +127,7 @@ Payment codes outside of 1-6 are set to NULL
 
 
 
-\## How to Run
+6. How to Run
 
 
 
@@ -175,11 +175,11 @@ This builds the star schema and runs all 5 analysis themes.
 
 
 
-\## Star Schema
+7. Star Schema
 
 
 
-1. Fact\_trips (one row per trip)
+i) Fact\_trips (one row per trip)
 * date\_key -> dim\_date  (year, month, day, hour, day\_name, is\_weekend)
 * pickup\_zone\_key -> dim\_zone  (zone\_name, borough, service\_zone)
 * dropoff\_zone\_key -> dim\_zone
@@ -187,7 +187,7 @@ This builds the star schema and runs all 5 analysis themes.
 
 
 
-2\. Derived measures added in "Fact\_trips":-
+ii) Derived measures added in "Fact\_trips":-
 
 * "trip\_duration\_min": dropoff time minus pickup time in minutes
 * "speed\_mph": distance divided by duration multiplied by 60
@@ -200,7 +200,7 @@ This builds the star schema and runs all 5 analysis themes.
 
 
 
-\## Key Findings
+8. Key Findings
 
 
 
