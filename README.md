@@ -1,4 +1,4 @@
-1. NYC Taxi Trip Pipeline
+## NYC Taxi Trip Pipeline
 
 
 
@@ -6,7 +6,7 @@ End to End Data Engineering and Analysis Pipeline for NYC TLC Taxi Trip data (20
 
 
 
-2. Project Overview
+## Project Overview
 
 
 
@@ -16,7 +16,7 @@ answers real question about Demand, Pricing/Tipping, service quality etc.
 
 
 
-3. Technical Stack
+## Technical Stack
 
 * Python (ingestion + cleaning)
 * DuckDB (Local Data Warehouse)
@@ -26,7 +26,7 @@ answers real question about Demand, Pricing/Tipping, service quality etc.
 
 
 
-4. Data Source
+## Data Source
 
 
 
@@ -44,11 +44,11 @@ NYC Taxi \ Limousine Commission (TLC) Trip Record Data
 
 
 
-5. Data Quality and assumptions
+## Data Quality and assumptions
 
 
 
-i) Column Standardizations
+### i) Column Standardizations
 
 
 
@@ -60,7 +60,7 @@ i) Column Standardizations
 
 
 
-ii) Duplicate Handling
+### ii) Duplicate Handling
 
 
 
@@ -70,7 +70,7 @@ ii) Duplicate Handling
 
 
 
-iii) Dirty Row Flagging
+### iii) Dirty Row Flagging
 
 
 
@@ -87,7 +87,7 @@ iii) Dirty Row Flagging
 
 
 
-iv) Payment Type Assumption
+### iv) Payment Type Assumption
 
 &#x20;  
 
@@ -106,7 +106,7 @@ Payment codes outside of 1-6 are set to NULL
 
 
 
-v) Geographic Assumptions
+### v) Geographic Assumptions
 
 
 
@@ -116,7 +116,7 @@ v) Geographic Assumptions
 
 
 
-vi) Tip Analysis Limitations
+### vi) Tip Analysis Limitations
 
 * tip\_amount is only populated for card payments (payment\_type = 1). 
 * All cash trips have tip\_amount = 0 by default, this does not mean cash passengers did not tip, only that tips were not recorded digitally.
@@ -127,45 +127,44 @@ vi) Tip Analysis Limitations
 
 
 
-6. How to Run
+## How to Run
 
 
 
-Step 1 — Install dependencies
+### Step 1 — Install dependencies
 
 
 
-"pip install requests pyarrow pandas duckdb matplotlib jupyter"
+`pip install requests pyarrow pandas duckdb matplotlib jupyter`
 
 
 
 
 
-Step 2 — Download raw Parquet files
+### Step 2 — Download raw Parquet files
+
+
+`python download.py`
 
 
 
-"python download.py"
+### Step 3 — Clean and standardize data
 
 
 
-Step 3 — Clean and standardize data
+`python clean.py`
 
 
 
-"python clean.py"
+### Step 4 — Open Jupyter and run the notebook
 
 
 
-Step 4 — Open Jupyter and run the notebook
+`jupyter notebook`
 
 
 
-"jupyter notebook"
-
-
-
-Step 5 — Open "analysis/Duckdb\_pipeline.ipynb" and run all cells
+### Step 5 — Open "analysis/Duckdb\_pipeline.ipynb" and run all cells
 
 
 
@@ -175,11 +174,11 @@ This builds the star schema and runs all 5 analysis themes.
 
 
 
-7. Star Schema
+## Star Schema
 
 
 
-i) Fact\_trips (one row per trip)
+### i) Fact\_trips (one row per trip)
 * date\_key -> dim\_date  (year, month, day, hour, day\_name, is\_weekend)
 * pickup\_zone\_key -> dim\_zone  (zone\_name, borough, service\_zone)
 * dropoff\_zone\_key -> dim\_zone
@@ -187,7 +186,7 @@ i) Fact\_trips (one row per trip)
 
 
 
-ii) Derived measures added in "Fact\_trips":-
+### ii) Derived measures added in "Fact\_trips":-
 
 * "trip\_duration\_min": dropoff time minus pickup time in minutes
 * "speed\_mph": distance divided by duration multiplied by 60
@@ -200,7 +199,7 @@ ii) Derived measures added in "Fact\_trips":-
 
 
 
-8. Key Findings
+## Key Findings
 
 
 
@@ -214,4 +213,3 @@ ii) Derived measures added in "Fact\_trips":-
 * Credit card users tip an average of 25.06%, highest among all the other payment methods. Cash tip amounts are recorded as $0 by default and excluded from tip analysis.
 * 4.57% of all records are dirty, meaning raw data collected which had quality issues; errors, anomalies, impossible values etc. Most common reason is `negative\_fare` (732,850 records).
 * Dirty rows are not deleted, rather they are flagged with `is\_dirty = 1` and a `dirty\_reason` for full transparency.
-
